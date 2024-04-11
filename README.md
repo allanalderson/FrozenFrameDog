@@ -11,3 +11,5 @@ If vMix input 2 is a PHOTOS FOLDER, configure its trigger: OnTransitionIn, Quick
 If vMix input 2 is a LIST OF VIDEOS, configure its trigger: OnTransitionIn, SelectIndex, Input 2, Delay 0, Value 1 AND OnCompletion, CutDirect, Input 1.
 
 vMix General settings should be Automatically mix audio
+
+!  Keep vMix in the front to capture the keystrokes !
