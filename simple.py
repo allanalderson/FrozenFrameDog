@@ -2,34 +2,22 @@ import cv2
 import pyautogui
 import threading
 import time
-
-print("FROZEN FRAME DIRECTOR\n")
+print()
 print("NOTE:   ENSURE NDI WEBCAM 1 IS IN SET TO 480p30 BEFORE RUNNING THIS CODE.\n")
 ####################
-difference_threshold = 5000  # Default 5000   Keep value below 20000 (480p)
-retrigger_holdoff = 10  # seconds.
-frame_distance = 30  # (30 = 1sec at 30fps) Higher values are more forgiving of occasional freezes
+difference_threshold = 5000 # Default 5000   Keep value below 20000
+retrigger_holdoff = 31 # seconds.
+frame_distance = 30 #  (30 = 1sec at 30fps) Higher values are more forgiving of dropous
 show_diff_window = True  # True or False
-cap = cv2.VideoCapture(0)  # 0 is NDI webcam 1
 ####################
-start_time = time.time()
+
 frame_count = 0
 frame_loss = False
+cap = cv2.VideoCapture(0) # 0 is NDI webcam 1
 ret, frame1 = cap.read()
 time.sleep(1)
 ret, frame2 = cap.read()
-time.sleep(3)
-no_overlays_rule = 0
-overlay1_in_time = 0
-
-def overlay_function():
-	if frame_loss == False: # Don't overlay during the adverts!
-		print(" Overlay 1 in")
-		pyautogui.typewrite("A")
-def rules_function():
-	if frame_loss == True:
-		print(" Overlays OFF")
-		pyautogui.typewrite("B")
+time.sleep(2)
 
 def reset_frame_loss():
 	global frame_loss
@@ -48,7 +36,7 @@ while True:
 	if frame_count % frame_distance == 0:
 		diff = cv2.absdiff(frame1, frame2)
 		pixel_difference_count = cv2.countNonZero(cv2.cvtColor(diff, cv2.COLOR_BGR2GRAY))
-		# print(pixel_difference_count)
+		#print(pixel_difference_count)
 		diff_gray = cv2.cvtColor(diff, cv2.COLOR_BGR2GRAY)
 		frame1 = frame2
 		if show_diff_window:
@@ -59,23 +47,5 @@ while True:
 			print(" Frame Loss \n")
 			pyautogui.typewrite("2")
 			threading.Thread(target=reset_frame_loss).start()
-	current_time = time.time()
-	if current_time - overlay1_in_time >= 60:  # Seconds
-		overlay_function()
-		overlay1_in_time = current_time
-
-	if current_time - no_overlays_rule >= .5:  # Seconds
-		rules_function()
-		no_overlays_rule = current_time
-
-
-
-
-
-
-
-
-
-
 cap.release()
 cv2.destroyAllWindows()
