@@ -7,12 +7,12 @@ print("FROZEN FRAME DIRECTOR\n")
 print("NOTE:   ENSURE NDI WEBCAM 1 IS IN SET TO 480p30 BEFORE RUNNING THIS CODE.\n")
 ####################
 overlay1_timer = 60 # seconds
-frame_distance = 15  # (30 = 1sec at 30fps) Higher values are more forgiving of occasional freezes
+frame_distance = 30  # (30 = 1sec at 30fps) Higher values are more forgiving of occasional freezes
 show_diff_window = False  # True or False
 difference_threshold = 5000  # Default 5000   Keep value below 20000 (480p)
 retrigger_holdoff = 5  # seconds.
 cap = cv2.VideoCapture(0)  # 0 is NDI webcam 1
-####################f2
+####################
 start_time = time.time()
 frame_count = 0
 frame_loss = False
@@ -25,8 +25,8 @@ overlay1_in_time = 0
 print("Running!")
 def overlay_function():
 	if frame_loss == False: # Don't overlay during the adverts!
-		print(" Overlay 1 In - F5 ")
-		pyautogui.press('f5')     # press a function key
+		print(" Overlay 3 In - F3 ")
+		pyautogui.press('f3')     # press a function key
 def rules_function():
 	if frame_loss == True:
 		print(" All Overlays OFF  - F12 ")

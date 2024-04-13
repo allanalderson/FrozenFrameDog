@@ -12,4 +12,6 @@ If vMix input 2 is a LIST OF VIDEOS, configure its trigger: OnTransitionIn, Sele
 
 vMix General settings should be Automatically mix audio
 
+Import key shortcuts
+
 !  Keep vMix in the front to capture the keystrokes !
